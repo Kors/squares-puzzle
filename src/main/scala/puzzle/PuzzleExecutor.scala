@@ -1,0 +1,5 @@
+package puzzle
+
+class PuzzleExecutor {
+
+}
