@@ -12,7 +12,7 @@ class PuzzleTest extends FunSpec {
   describe("Read") {
     it("read from file successfully") {
       val squares = DataReader.read(filename)
-      assert(squares.nonEmpty)
+      assert(squares.size == 12, squares)
     }
   }
 
