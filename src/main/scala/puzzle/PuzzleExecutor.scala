@@ -2,7 +2,7 @@ package puzzle
 
 import scala.collection.mutable.ArrayBuffer
 
-class PuzzleExecutor {
+object PuzzleExecutor {
 
   // будет выбирать те четвёрки, которые в по сумме углов дают десятку
   // пока совсем не функционально

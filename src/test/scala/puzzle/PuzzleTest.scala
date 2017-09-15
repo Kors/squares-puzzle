@@ -9,8 +9,7 @@ class PuzzleTest extends FunSpec {
 
   describe("Read") {
     it("read from file successfully") {
-      val reader = new DataReader
-      val squares = reader.read(filename)
+      val squares = DataReader.read(filename)
       for (s <- squares)
         println(s)
       assert(squares.nonEmpty)
