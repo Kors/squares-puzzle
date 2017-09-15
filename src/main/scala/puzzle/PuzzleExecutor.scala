@@ -16,7 +16,11 @@ object PuzzleExecutor {
           val sub3 = sub2.filter(s => s != s3)
           for (s4 <- sub3) {
             if (s1.rightDown + s2.leftDown + s3.rightUp + s4.leftUp == 10)
-              buf += List(s1, s2, s3, s4)
+              if (s1.leftDown + s3.leftUp < 10 &&
+                s1.rightUp + s2.leftUp < 10 &&
+                s2.rightDown + s4.rightUp < 10 &&
+                s3.rightDown + s4.leftDown < 10)
+                buf += List(s1, s2, s3, s4)
           }
         }
       }
@@ -56,6 +60,16 @@ object PuzzleExecutor {
     })
     rightEquality
   }
+
+  //  def filterByFunc(groupsToFilter: ArrayBuffer[List[Square]], anotherGroups: ArrayBuffer[List[Square]], p: Boolean): ArrayBuffer[List[Square]] = {
+  //    groupsToFilter.filter(g => {
+  //      var flag = false
+  //      for (other <- anotherGroups.filter(o => o != g))
+  //        if (p)
+  //          flag = true
+  //      flag
+  //    })
+  //  }
 
   def matchesUpperSide(centralGroup: List[Square], anotherGroup: List[Square]): Boolean = {
     if (centralGroup.head == anotherGroup(2) &&

@@ -31,6 +31,7 @@ class PuzzleTest extends FunSpec {
         assert(group(1) != group(3), group)
         assert(group(2) != group(3), group)
       })
+      println("Groups found:" + groups.size)
     }
 
     it("filter groups") {
@@ -40,6 +41,7 @@ class PuzzleTest extends FunSpec {
       print(filteredGroups)
       assert(filteredGroups.nonEmpty)
       assert(filteredGroups.size < groups.size)
+      println("After filtering:" + filteredGroups.size)
     }
   }
 
