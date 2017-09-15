@@ -1,15 +1,11 @@
 package puzzle
 
-class Square(leftUp: Int, rightUp: Int, leftDown: Int, rightDown: Int)
+case class Square(leftUp: Int, rightUp: Int, leftDown: Int, rightDown: Int)
 
-object Square {
-  def apply(s: String): Square = apply(s.toInt)
-
-  def apply(value: Int): Square = {
-    val leftUp: Int = value / 1000
-    val rightUp: Int = (value / 100) % 10
-    val leftDown: Int = (value / 10) % 100
-    val rightDown: Int = value % 1000
-    new Square(leftUp, rightUp, leftDown, rightDown)
+object SquareFactory {
+  def apply(s: String): Square = {
+    val values = s.split(" ")
+    assert(values.size == 4)
+    Square(values(0).toInt, values(1).toInt, values(2).toInt, values(3).toInt)
   }
 }
