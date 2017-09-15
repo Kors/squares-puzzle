@@ -7,18 +7,19 @@ import scala.collection.mutable.ArrayBuffer
 class PuzzleTest extends FunSpec {
   info("Starting...")
 
-  val filename = "src/main/resources/example4.txt"
+  val inputFileName = "src/main/resources/example4.txt"
+  val outputFileName = "src/main/resources/output.txt"
 
   describe("Read") {
     it("read from file successfully") {
-      val squares = DataReader.read(filename)
+      val squares = DataIO.read(inputFileName)
       assert(squares.size == 12, squares)
     }
   }
 
   describe("Group") {
     it("move squares into groups") {
-      val squares = DataReader.read(filename)
+      val squares = DataIO.read(inputFileName)
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
       assert(groups.nonEmpty)
       groups.foreach(group => {
@@ -34,7 +35,7 @@ class PuzzleTest extends FunSpec {
     }
 
     it("filter groups") {
-      val squares = DataReader.read(filename)
+      val squares = DataIO.read(inputFileName)
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
       val filteredGroups = PuzzleExecutor.filterGroups(groups)
       assert(filteredGroups.nonEmpty)
@@ -43,7 +44,7 @@ class PuzzleTest extends FunSpec {
     }
 
     it("results") {
-      val squares = DataReader.read(filename)
+      val squares = DataIO.read(inputFileName)
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
       val filteredGroups = PuzzleExecutor.filterGroups(groups)
       val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
@@ -52,7 +53,7 @@ class PuzzleTest extends FunSpec {
     }
 
     it("final results") {
-      val squares = DataReader.read(filename)
+      val squares = DataIO.read(inputFileName)
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
       val filteredGroups = PuzzleExecutor.filterGroups(groups)
       val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
@@ -61,6 +62,7 @@ class PuzzleTest extends FunSpec {
       assert(finalResults.nonEmpty)
       println("FinalResults size:" + finalResults.size)
     }
+
   }
 
   def print(vals: ArrayBuffer[List[Square]]): Unit = {

@@ -1,6 +1,10 @@
 package puzzle
 
-case class Square(leftUp: Int, rightUp: Int, leftDown: Int, rightDown: Int)
+case class Square(leftUp: Int, rightUp: Int, leftDown: Int, rightDown: Int) {
+  def toFormattedString: String = {
+    leftUp + " " + rightUp + " " + leftDown + " " + rightDown + System.lineSeparator()
+  }
+}
 
 object SquareFactory {
   def apply(s: String): Square = {
