@@ -43,6 +43,16 @@ class PuzzleTest extends FunSpec {
       assert(filteredGroups.size < groups.size)
       println("After filtering:" + filteredGroups.size)
     }
+
+    it("results") {
+      val squares = DataReader.read(filename)
+      val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
+      val filteredGroups = PuzzleExecutor.filterGroups(groups)
+      val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
+      print(results)
+      assert(results.nonEmpty)
+      println("Results size:" + results.size)
+    }
   }
 
   def print(vals: ArrayBuffer[List[Square]]): Unit = {

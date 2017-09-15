@@ -61,16 +61,6 @@ object PuzzleExecutor {
     rightEquality
   }
 
-  //  def filterByFunc(groupsToFilter: ArrayBuffer[List[Square]], anotherGroups: ArrayBuffer[List[Square]], p: Boolean): ArrayBuffer[List[Square]] = {
-  //    groupsToFilter.filter(g => {
-  //      var flag = false
-  //      for (other <- anotherGroups.filter(o => o != g))
-  //        if (p)
-  //          flag = true
-  //      flag
-  //    })
-  //  }
-
   def matchesUpperSide(centralGroup: List[Square], anotherGroup: List[Square]): Boolean = {
     if (centralGroup.head == anotherGroup(2) &&
       centralGroup(1) == anotherGroup(3) &&
@@ -109,6 +99,36 @@ object PuzzleExecutor {
       true
     else
       false
+  }
+
+  def mergeIntoResult(centralGroups: ArrayBuffer[List[Square]], groups: ArrayBuffer[List[Square]]): ArrayBuffer[List[Square]] = {
+    val groupLists = new ArrayBuffer[List[Square]]
+    centralGroups.foreach(g => {
+      val other1 = groups.filter(o1 => o1 != g)
+      for (o1 <- other1)
+        if (matchesUpperSide(g, o1)) {
+          val other2 = other1.filter(o2 => o2 != g)
+            .filter(o2 => o2 != o1)
+          for (o2 <- other2)
+            if (matchesDownSide(g, o2)) {
+              val other3 = other2.filter(o3 => o3 != g)
+                .filter(o3 => o3 != o1)
+                .filter(o3 => o3 != o2)
+              for (o3 <- other3)
+                if (matchesLeftSide(g, o3)) {
+                  val other4 = other3.filter(o4 => o4 != g)
+                    .filter(o4 => o4 != o1)
+                    .filter(o4 => o4 != o2)
+                    .filter(o4 => o4 != o3)
+                  for (o4 <- other4)
+                    if (matchesRightSide(g, o4)) {
+                      groupLists += List[Square](o1.head, o1(1), o3.head, g.head, g(1), o4(1), o3(2), g(2), g(3), o4(3), o2(2), o2(3))
+                    }
+                }
+            }
+        }
+    })
+    groupLists
   }
 
 }
