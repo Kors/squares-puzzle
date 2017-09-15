@@ -20,7 +20,6 @@ class PuzzleTest extends FunSpec {
     it("move squares into groups") {
       val squares = DataReader.read(filename)
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
-      print(groups)
       assert(groups.nonEmpty)
       groups.foreach(group => {
         assert(group.size == 4)
@@ -38,7 +37,6 @@ class PuzzleTest extends FunSpec {
       val squares = DataReader.read(filename)
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
       val filteredGroups = PuzzleExecutor.filterGroups(groups)
-      print(filteredGroups)
       assert(filteredGroups.nonEmpty)
       assert(filteredGroups.size < groups.size)
       println("After filtering:" + filteredGroups.size)
@@ -49,9 +47,19 @@ class PuzzleTest extends FunSpec {
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
       val filteredGroups = PuzzleExecutor.filterGroups(groups)
       val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
-      print(results)
       assert(results.nonEmpty)
       println("Results size:" + results.size)
+    }
+
+    it("final results") {
+      val squares = DataReader.read(filename)
+      val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
+      val filteredGroups = PuzzleExecutor.filterGroups(groups)
+      val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
+      val finalResults = PuzzleExecutor.filterResultsToFinal(results)
+      print(finalResults)
+      assert(finalResults.nonEmpty)
+      println("FinalResults size:" + finalResults.size)
     }
   }
 

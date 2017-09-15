@@ -16,10 +16,10 @@ object PuzzleExecutor {
           val sub3 = sub2.filter(s => s != s3)
           for (s4 <- sub3) {
             if (s1.rightDown + s2.leftDown + s3.rightUp + s4.leftUp == 10)
-              if (s1.leftDown + s3.leftUp < 10 &&
-                s1.rightUp + s2.leftUp < 10 &&
-                s2.rightDown + s4.rightUp < 10 &&
-                s3.rightDown + s4.leftDown < 10)
+              if (s1.leftDown + s3.leftUp <= 10 &&
+                s1.rightUp + s2.leftUp <= 10 &&
+                s2.rightDown + s4.rightUp <= 10 &&
+                s3.rightDown + s4.leftDown <= 10)
                 buf += List(s1, s2, s3, s4)
           }
         }
@@ -142,5 +142,17 @@ object PuzzleExecutor {
   }
 
   // TODO фильтр результатов по тройкам
+  def filterResultsToFinal(results: ArrayBuffer[List[Square]]): ArrayBuffer[List[Square]] = {
+    val finalResults = results.filter(list => {
+      if (list(0).leftDown + list(2).rightUp + list(3).leftUp <= 10 &&
+        list(1).rightDown + list(4).rightUp + list(5).leftUp <= 10 &&
+        list(6).rightDown + list(7).leftDown + list(10).leftUp <= 10 &&
+        list(8).rightDown + list(9).leftDown + list(11).rightUp <= 10)
+        true
+      else
+        false
+    })
+    finalResults
+  }
 
 }
