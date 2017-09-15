@@ -141,4 +141,6 @@ object PuzzleExecutor {
       false
   }
 
+  // TODO фильтр результатов по тройкам
+
 }
