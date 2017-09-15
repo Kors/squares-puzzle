@@ -24,4 +24,49 @@ object PuzzleExecutor {
     buf
   }
 
+  // TODO refactor
+  def filterGroups(groups: ArrayBuffer[List[Square]]): ArrayBuffer[List[Square]] = {
+    val upEquality = groups.filter(g => {
+      var flag = false
+      for (other <- groups.filter(o => o != g)) {
+        if (g.head == other(2) && g(1) == other(3))
+          if (!other.contains(g(2)) &&
+            !other.contains(g(3)))
+            flag = true
+      }
+      flag
+    })
+    val downEquality = upEquality.filter(g => {
+      var flag = false
+      for (other <- groups.filter(o => o != g)) {
+        if (g(2) == other.head && g(3) == other(1))
+          if (!other.contains(g.head) &&
+            !other.contains(g(1)))
+            flag = true
+      }
+      flag
+    })
+    val leftEquality = downEquality.filter(g => {
+      var flag = false
+      for (other <- groups.filter(o => o != g)) {
+        if (g.head == other(1) && g(2) == other(3))
+          if (!other.contains(g(1)) &&
+            !other.contains(g(3)))
+            flag = true
+      }
+      flag
+    })
+    val rightEquality = leftEquality.filter(g => {
+      var flag = false
+      for (other <- groups.filter(o => o != g)) {
+        if (g(1) == other.head && g(3) == other(2))
+          if (!other.contains(g.head) &&
+            !other.contains(g(2)))
+            flag = true
+      }
+      flag
+    })
+    rightEquality
+  }
+
 }
