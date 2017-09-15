@@ -7,7 +7,7 @@ import scala.collection.mutable.ArrayBuffer
 class PuzzleTest extends FunSpec {
   info("Starting...")
 
-  val filename = "src/main/resources/example1.txt"
+  val filename = "src/main/resources/example4.txt"
 
   describe("Read") {
     it("read from file successfully") {

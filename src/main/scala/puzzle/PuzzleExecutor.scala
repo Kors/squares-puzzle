@@ -122,13 +122,23 @@ object PuzzleExecutor {
                     .filter(o4 => o4 != o3)
                   for (o4 <- other4)
                     if (matchesRightSide(g, o4)) {
-                      groupLists += List[Square](o1.head, o1(1), o3.head, g.head, g(1), o4(1), o3(2), g(2), g(3), o4(3), o2(2), o2(3))
+                      val list = List[Square](o1.head, o1(1), o3.head, g.head, g(1), o4(1), o3(2), g(2), g(3), o4(3), o2(2), o2(3))
+                      if (eachElementOnece(list))
+                        groupLists += list
                     }
                 }
             }
         }
     })
     groupLists
+  }
+
+  def eachElementOnece(list: List[Square]): Boolean = {
+    val set = Set(list: _*)
+    if (set.size == 12)
+      true
+    else
+      false
   }
 
 }
