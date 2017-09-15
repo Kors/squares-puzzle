@@ -22,6 +22,15 @@ class PuzzleTest extends FunSpec {
       val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
       print(groups)
       assert(groups.nonEmpty)
+      groups.foreach(group => {
+        assert(group.size == 4)
+        assert(group.head != group(1), group)
+        assert(group.head != group(2), group)
+        assert(group.head != group(3), group)
+        assert(group(1) != group(2), group)
+        assert(group(1) != group(3), group)
+        assert(group(2) != group(3), group)
+      })
     }
   }
 
