@@ -29,10 +29,12 @@ object SquareOfSquares {
   }
 
   private def isCorrectForSquareOfSquares(upPair: PairOfSquares, downPair: PairOfSquares): Boolean = {
-    if (upPair.leftSquare.rightDown + upPair.rightSquare.leftDown
-      + downPair.leftSquare.rightUp + downPair.rightSquare.leftUp == sum &&
+    val set = Set(upPair.leftSquare, upPair.rightSquare, downPair.leftSquare, downPair.rightSquare)
+    if (set.size == 4 &&
+      upPair.leftSquare.rightDown + upPair.rightSquare.leftDown + downPair.leftSquare.rightUp + downPair.rightSquare.leftUp == sum &&
       upPair.leftSquare.leftDown + downPair.leftSquare.leftUp <= sum &&
-      upPair.rightSquare.rightDown + downPair.rightSquare.rightUp <= sum)
+      upPair.rightSquare.rightDown + downPair.rightSquare.rightUp <= sum
+    )
       true
     else
       false
