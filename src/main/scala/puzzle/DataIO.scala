@@ -9,7 +9,7 @@ object DataIO {
   def read(fileName: String): List[Square] =
     Source.fromFile(fileName).getLines.map(s => Square.apply(s)).toList
 
-  def write(data: ArrayBuffer[List[Square]], fileName: String): Unit = {
+  def write(data: List[List[Square]], fileName: String): Unit = {
     val writer = new PrintWriter(new File(fileName))
     data.foreach(result => {
       result.foreach(square => writer.write(square.toFormattedString))

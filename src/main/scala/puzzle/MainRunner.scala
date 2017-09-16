@@ -11,6 +11,6 @@ object MainRunner {
     val squares = DataIO.read(inputFileName)
     val results = PuzzleExecutor.execute(squares)
     DataIO.write(results, outputFileName)
-    System.out.println("processed successfully.")
+    System.out.println("processed successfully. " + results.size + " results found.")
   }
 }

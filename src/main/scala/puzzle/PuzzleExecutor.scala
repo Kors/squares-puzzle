@@ -4,7 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 
 object PuzzleExecutor {
 
-  def execute(squares: List[Square]): ArrayBuffer[List[Square]] = {
+  def execute(squares: List[Square]): List[List[Square]] = {
     val pairs = getAllMatchedPairs(squares)
     val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
     val filteredGroups = PuzzleExecutor.filterGroups(groups)
@@ -12,7 +12,7 @@ object PuzzleExecutor {
     PuzzleExecutor.filterResultsToFinal(results)
   }
 
-  def getAllMatchedPairs(squares: List[Square]): ArrayBuffer[PairOfSquares] = {
+  def getAllMatchedPairs(squares: List[Square]): List[PairOfSquares] = {
     val buf: ArrayBuffer[PairOfSquares] = ArrayBuffer()
     for (s1 <- squares) {
       val sub1 = squares.filter(s => s != s1)
@@ -22,12 +22,10 @@ object PuzzleExecutor {
         }
       }
     }
-    buf
+    buf.toList
   }
 
-  // будет выбирать те четвёрки, которые в по сумме углов дают десятку
-  // пока совсем не функционально
-  def getAllMatchedQuarters(squares: List[Square]): ArrayBuffer[SquareOfSquares] = {
+  def getAllMatchedQuarters(squares: List[Square]): List[SquareOfSquares] = {
     val buf: ArrayBuffer[SquareOfSquares] = ArrayBuffer()
     for (s1 <- squares) {
       val sub1 = squares.filter(s => s != s1) // TODO проверить корректность такой фильтрации на двух разных элементах с одинаковым содержимым
@@ -43,11 +41,11 @@ object PuzzleExecutor {
         }
       }
     }
-    buf
+    buf.toList
   }
 
   // TODO refactor
-  def filterGroups(groups: ArrayBuffer[SquareOfSquares]): ArrayBuffer[SquareOfSquares] = {
+  def filterGroups(groups: List[SquareOfSquares]): List[SquareOfSquares] = {
     val upEquality = groups.filter(g => {
       var flag = false
       for (other <- groups.filter(o => o != g))
@@ -111,7 +109,7 @@ object PuzzleExecutor {
       false
   }
 
-  def mergeIntoResult(centralGroups: ArrayBuffer[SquareOfSquares], groups: ArrayBuffer[SquareOfSquares]): ArrayBuffer[List[Square]] = {
+  def mergeIntoResult(centralGroups: List[SquareOfSquares], groups: List[SquareOfSquares]): List[List[Square]] = {
     val groupLists = new ArrayBuffer[List[Square]]
     centralGroups.foreach(g => {
       val other1 = groups.filter(o1 => o1 != g)
@@ -143,7 +141,7 @@ object PuzzleExecutor {
             }
         }
     })
-    groupLists
+    groupLists.toList
   }
 
   def eachElementOnece(list: List[Square]): Boolean = {
@@ -155,7 +153,7 @@ object PuzzleExecutor {
   }
 
   // TODO фильтр результатов по тройкам
-  def filterResultsToFinal(results: ArrayBuffer[List[Square]]): ArrayBuffer[List[Square]] = {
+  def filterResultsToFinal(results: List[List[Square]]): List[List[Square]] = {
     val finalResults = results.filter(list => {
       if (list(0).leftDown + list(2).rightUp + list(3).leftUp <= 10 &&
         list(1).rightDown + list(4).rightUp + list(5).leftUp <= 10 &&
