@@ -21,19 +21,18 @@ case class SquareOfSquares(leftUpSquare: Square, rightUpSquare: Square, leftDown
 object SquareOfSquares {
   private val sum = 10
 
-  def apply(leftUpSquare: Square, rightUpSquare: Square, leftDownSquare: Square, rightDownSquare: Square): Option[SquareOfSquares] = {
-    if (isCorrectForSquareOfSquares(leftUpSquare, rightUpSquare, leftDownSquare, rightDownSquare))
-      Option(new SquareOfSquares(leftUpSquare, rightUpSquare, leftDownSquare, rightDownSquare))
+  def apply(upPair: PairOfSquares, downPair: PairOfSquares): Option[SquareOfSquares] = {
+    if (isCorrectForSquareOfSquares(upPair, downPair))
+      Option(new SquareOfSquares(upPair.leftSquare, upPair.rightSquare, downPair.leftSquare, downPair.rightSquare))
     else
       Option.empty
   }
 
-  private def isCorrectForSquareOfSquares(leftUpSquare: Square, rightUpSquare: Square, leftDownSquare: Square, rightDownSquare: Square): Boolean = {
-    if (leftUpSquare.rightDown + rightUpSquare.leftDown + leftDownSquare.rightUp + rightDownSquare.leftUp == sum &&
-      leftUpSquare.rightUp + rightUpSquare.leftUp <= sum &&
-      leftUpSquare.leftDown + leftDownSquare.leftUp <= sum &&
-      rightUpSquare.rightDown + rightDownSquare.rightUp <= sum &&
-      leftDownSquare.rightDown + rightDownSquare.leftDown <= sum)
+  private def isCorrectForSquareOfSquares(upPair: PairOfSquares, downPair: PairOfSquares): Boolean = {
+    if (upPair.leftSquare.rightDown + upPair.rightSquare.leftDown
+      + downPair.leftSquare.rightUp + downPair.rightSquare.leftUp == sum &&
+      upPair.leftSquare.leftDown + downPair.leftSquare.leftUp <= sum &&
+      upPair.rightSquare.rightDown + downPair.rightSquare.rightUp <= sum)
       true
     else
       false

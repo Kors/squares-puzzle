@@ -6,7 +6,7 @@ object PuzzleExecutor {
 
   def execute(squares: List[Square]): List[List[Square]] = {
     val pairs = getAllMatchedPairs(squares)
-    val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
+    val groups = PuzzleExecutor.getAllMatchedQuarters(pairs)
     val filteredGroups = PuzzleExecutor.filterGroups(groups)
     val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
     PuzzleExecutor.filterResultsToFinal(results)
@@ -25,19 +25,13 @@ object PuzzleExecutor {
     buf.toList
   }
 
-  def getAllMatchedQuarters(squares: List[Square]): List[SquareOfSquares] = {
+  def getAllMatchedQuarters(pairs: List[PairOfSquares]): List[SquareOfSquares] = {
     val buf: ArrayBuffer[SquareOfSquares] = ArrayBuffer()
-    for (s1 <- squares) {
-      val sub1 = squares.filter(s => s != s1) // TODO проверить корректность такой фильтрации на двух разных элементах с одинаковым содержимым
-      for (s2 <- sub1) {
-        val sub2 = sub1.filter(s => s != s2)
-        for (s3 <- sub2.tail) {
-          val sub3 = sub2.filter(s => s != s3)
-          for (s4 <- sub3) {
-            for (set <- SquareOfSquares.apply(s1, s2, s3, s4)) {
-              buf += set
-            }
-          }
+    for (p1 <- pairs) {
+      val sub1 = pairs.filter(p => p != p1) // TODO проверить корректность такой фильтрации на двух разных элементах с одинаковым содержимым
+      for (p2 <- sub1) {
+        for (set <- SquareOfSquares.apply(p1, p2)) {
+          buf += set
         }
       }
     }
