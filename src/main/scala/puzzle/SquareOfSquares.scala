@@ -11,4 +11,20 @@ case class SquareOfSquares(leftUpSquare: Square, rightUpSquare: Square, leftDown
       true
     false
   }
+
+  def upSide: List[Square] = {
+    List(leftUpSquare, rightUpSquare)
+  }
+
+  def downSide: List[Square] = {
+    List(leftDownSquare, rightDownSquare)
+  }
+
+  def leftSide: List[Square] = {
+    List(leftUpSquare, leftDownSquare)
+  }
+
+  def rightSide: List[Square] = {
+    List(rightUpSquare, rightDownSquare)
+  }
 }

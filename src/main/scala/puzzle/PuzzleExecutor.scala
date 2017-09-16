@@ -6,8 +6,8 @@ object PuzzleExecutor {
 
   // будет выбирать те четвёрки, которые в по сумме углов дают десятку
   // пока совсем не функционально
-  def getAllMatchedQuarters(squares: List[Square]): ArrayBuffer[List[Square]] = {
-    val buf: ArrayBuffer[List[Square]] = ArrayBuffer()
+  def getAllMatchedQuarters(squares: List[Square]): ArrayBuffer[SquareOfSquares] = {
+    val buf: ArrayBuffer[SquareOfSquares] = ArrayBuffer()
     for (s1 <- squares) {
       val sub1 = squares.filter(s => s != s1) // TODO проверить корректность такой фильтрации на двух разных элементах с одинаковым содержимым
       for (s2 <- sub1) {
@@ -15,12 +15,9 @@ object PuzzleExecutor {
         for (s3 <- sub2.tail) {
           val sub3 = sub2.filter(s => s != s3)
           for (s4 <- sub3) {
-            if (s1.rightDown + s2.leftDown + s3.rightUp + s4.leftUp == 10)
-              if (s1.leftDown + s3.leftUp <= 10 &&
-                s1.rightUp + s2.leftUp <= 10 &&
-                s2.rightDown + s4.rightUp <= 10 &&
-                s3.rightDown + s4.leftDown <= 10)
-                buf += List(s1, s2, s3, s4)
+            val set = SquareOfSquares(s1, s2, s3, s4)
+            if (set.isCorrect)
+              buf += set
           }
         }
       }
@@ -29,7 +26,7 @@ object PuzzleExecutor {
   }
 
   // TODO refactor
-  def filterGroups(groups: ArrayBuffer[List[Square]]): ArrayBuffer[List[Square]] = {
+  def filterGroups(groups: ArrayBuffer[SquareOfSquares]): ArrayBuffer[SquareOfSquares] = {
     val upEquality = groups.filter(g => {
       var flag = false
       for (other <- groups.filter(o => o != g))
@@ -61,47 +58,39 @@ object PuzzleExecutor {
     rightEquality
   }
 
-  def matchesUpperSide(centralGroup: List[Square], anotherGroup: List[Square]): Boolean = {
-    if (centralGroup.head == anotherGroup(2) &&
-      centralGroup(1) == anotherGroup(3) &&
-      !anotherGroup.contains(centralGroup(2)) &&
-      !anotherGroup.contains(centralGroup(3)))
+  def matchesUpperSide(centralGroup: SquareOfSquares, anotherGroup: SquareOfSquares): Boolean = {
+    if (centralGroup.upSide == anotherGroup.downSide &&
+      centralGroup.downSide.intersect(anotherGroup.upSide).isEmpty)
       true
     else
       false
   }
 
-  def matchesDownSide(centralGroup: List[Square], anotherGroup: List[Square]): Boolean = {
-    if (centralGroup(2) == anotherGroup.head &&
-      centralGroup(3) == anotherGroup(1) &&
-      !anotherGroup.contains(centralGroup.head) &&
-      !anotherGroup.contains(centralGroup(1)))
+  def matchesDownSide(centralGroup: SquareOfSquares, anotherGroup: SquareOfSquares): Boolean = {
+    if (centralGroup.downSide == anotherGroup.upSide &&
+      centralGroup.upSide.intersect(anotherGroup.downSide).isEmpty)
       true
     else
       false
   }
 
-  def matchesLeftSide(centralGroup: List[Square], anotherGroup: List[Square]): Boolean = {
-    if (centralGroup.head == anotherGroup(1) &&
-      centralGroup(2) == anotherGroup(3) &&
-      !anotherGroup.contains(centralGroup(1)) &&
-      !anotherGroup.contains(centralGroup(3)))
+  def matchesLeftSide(centralGroup: SquareOfSquares, anotherGroup: SquareOfSquares): Boolean = {
+    if (centralGroup.leftSide == anotherGroup.rightSide &&
+      centralGroup.rightSide.intersect(anotherGroup.leftSide).isEmpty)
       true
     else
       false
   }
 
-  def matchesRightSide(centralGroup: List[Square], anotherGroup: List[Square]): Boolean = {
-    if (centralGroup(1) == anotherGroup.head &&
-      centralGroup(3) == anotherGroup(2) &&
-      !anotherGroup.contains(centralGroup.head) &&
-      !anotherGroup.contains(centralGroup(2)))
+  def matchesRightSide(centralGroup: SquareOfSquares, anotherGroup: SquareOfSquares): Boolean = {
+    if (centralGroup.rightSide == anotherGroup.leftSide &&
+      centralGroup.leftSide.intersect(anotherGroup.rightSide).isEmpty)
       true
     else
       false
   }
 
-  def mergeIntoResult(centralGroups: ArrayBuffer[List[Square]], groups: ArrayBuffer[List[Square]]): ArrayBuffer[List[Square]] = {
+  def mergeIntoResult(centralGroups: ArrayBuffer[SquareOfSquares], groups: ArrayBuffer[SquareOfSquares]): ArrayBuffer[List[Square]] = {
     val groupLists = new ArrayBuffer[List[Square]]
     centralGroups.foreach(g => {
       val other1 = groups.filter(o1 => o1 != g)
@@ -122,7 +111,10 @@ object PuzzleExecutor {
                     .filter(o4 => o4 != o3)
                   for (o4 <- other4)
                     if (matchesRightSide(g, o4)) {
-                      val list = List[Square](o1.head, o1(1), o3.head, g.head, g(1), o4(1), o3(2), g(2), g(3), o4(3), o2(2), o2(3))
+                      val list = List[Square](o1.leftUpSquare, o1.rightUpSquare,
+                        o3.leftUpSquare, g.leftUpSquare, g.rightUpSquare, o4.rightUpSquare,
+                        o3.leftDownSquare, g.leftDownSquare, g.rightDownSquare, o4.rightDownSquare,
+                        o2.leftDownSquare, o2.rightDownSquare)
                       if (eachElementOnece(list))
                         groupLists += list
                     }
