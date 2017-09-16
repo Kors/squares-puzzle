@@ -2,8 +2,6 @@ package puzzle
 
 import org.scalatest.FunSpec
 
-import scala.collection.mutable.ArrayBuffer
-
 class PuzzleTest extends FunSpec {
   info("Starting...")
 
@@ -18,53 +16,25 @@ class PuzzleTest extends FunSpec {
   }
 
   describe("Group") {
-    it("move squares into groups") {
-      val squares = DataIO.read(inputFileName)
-      val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
-      assert(groups.nonEmpty)
-      groups.foreach(group => {
-        assert(group.leftUpSquare != group.rightUpSquare, group)
-        assert(group.leftUpSquare != group.leftDownSquare, group)
-        assert(group.leftUpSquare != group.rightDownSquare, group)
-        assert(group.rightUpSquare != group.leftDownSquare, group)
-        assert(group.rightUpSquare != group.rightDownSquare, group)
-        assert(group.leftDownSquare != group.rightDownSquare, group)
-      })
-      println("Groups found:" + groups.size)
-    }
-
-    it("filter groups") {
-      val squares = DataIO.read(inputFileName)
-      val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
-      val filteredGroups = PuzzleExecutor.filterGroups(groups)
-      assert(filteredGroups.nonEmpty)
-      assert(filteredGroups.size < groups.size)
-      println("After filtering:" + filteredGroups.size)
-    }
-
-    it("results") {
-      val squares = DataIO.read(inputFileName)
-      val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
-      val filteredGroups = PuzzleExecutor.filterGroups(groups)
-      val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
-      assert(results.nonEmpty)
-      println("Results size:" + results.size)
-    }
-
     it("final results") {
       val squares = DataIO.read(inputFileName)
-      val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
+      println("squares size:" + squares.size)
+      val pairs = PuzzleExecutor.getAllMatchedPairs(squares)
+      println("pairs size:" + pairs.size)
+      val groups = PuzzleExecutor.getAllMatchedQuarters(pairs)
+      println("groups size:" + groups.size)
       val filteredGroups = PuzzleExecutor.filterGroups(groups)
+      println("filteredGroups size:" + filteredGroups.size)
       val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
+      println("results size:" + results.size)
       val finalResults = PuzzleExecutor.filterResultsToFinal(results)
       print(finalResults)
       assert(finalResults.nonEmpty)
       println("FinalResults size:" + finalResults.size)
     }
-
   }
 
-  def print(vals: ArrayBuffer[List[Square]]): Unit = {
+  def print(vals: List[List[Square]]): Unit = {
     println()
     for (e <- vals)
       println(e)
