@@ -15,9 +15,9 @@ object PuzzleExecutor {
         for (s3 <- sub2.tail) {
           val sub3 = sub2.filter(s => s != s3)
           for (s4 <- sub3) {
-            val set = SquareOfSquares(s1, s2, s3, s4)
-            if (set.isCorrect)
+            for (set <- SquareOfSquaresFactory.apply(s1, s2, s3, s4)) {
               buf += set
+            }
           }
         }
       }
