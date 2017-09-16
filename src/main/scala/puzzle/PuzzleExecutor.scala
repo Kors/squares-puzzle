@@ -5,10 +5,24 @@ import scala.collection.mutable.ArrayBuffer
 object PuzzleExecutor {
 
   def execute(squares: List[Square]): ArrayBuffer[List[Square]] = {
+    val pairs = getAllMatchedPairs(squares)
     val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
     val filteredGroups = PuzzleExecutor.filterGroups(groups)
     val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
     PuzzleExecutor.filterResultsToFinal(results)
+  }
+
+  def getAllMatchedPairs(squares: List[Square]): ArrayBuffer[PairOfSquares] = {
+    val buf: ArrayBuffer[PairOfSquares] = ArrayBuffer()
+    for (s1 <- squares) {
+      val sub1 = squares.filter(s => s != s1)
+      for (s2 <- sub1) {
+        for (set <- PairOfSquares.apply(s1, s2)) {
+          buf += set
+        }
+      }
+    }
+    buf
   }
 
   // будет выбирать те четвёрки, которые в по сумме углов дают десятку
