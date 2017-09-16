@@ -9,11 +9,8 @@ object MainRunner {
   def main(args: Array[String]): Unit = {
     System.out.println("Puzzle processing...")
     val squares = DataIO.read(inputFileName)
-    val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
-    val filteredGroups = PuzzleExecutor.filterGroups(groups)
-    val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
-    val finalResults = PuzzleExecutor.filterResultsToFinal(results)
-    DataIO.write(finalResults, outputFileName)
+    val results = PuzzleExecutor.execute(squares)
+    DataIO.write(results, outputFileName)
     System.out.println("processed successfully.")
   }
 }

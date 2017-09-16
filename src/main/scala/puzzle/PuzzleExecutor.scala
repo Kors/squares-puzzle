@@ -4,6 +4,13 @@ import scala.collection.mutable.ArrayBuffer
 
 object PuzzleExecutor {
 
+  def execute(squares: List[Square]): ArrayBuffer[List[Square]] = {
+    val groups = PuzzleExecutor.getAllMatchedQuarters(squares)
+    val filteredGroups = PuzzleExecutor.filterGroups(groups)
+    val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groups)
+    PuzzleExecutor.filterResultsToFinal(results)
+  }
+
   // будет выбирать те четвёрки, которые в по сумме углов дают десятку
   // пока совсем не функционально
   def getAllMatchedQuarters(squares: List[Square]): ArrayBuffer[SquareOfSquares] = {
