@@ -145,11 +145,7 @@ object PuzzleExecutor {
   }
 
   def eachElementOnece(list: List[Square]): Boolean = {
-    val set = Set(list: _*)
-    if (set.size == 12)
-      true
-    else
-      false
+    list.distinct.size == 12
   }
 
   // TODO фильтр результатов по тройкам
