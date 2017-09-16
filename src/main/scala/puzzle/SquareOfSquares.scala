@@ -18,12 +18,12 @@ case class SquareOfSquares(leftUpSquare: Square, rightUpSquare: Square, leftDown
   }
 }
 
-object SquareOfSquaresFactory {
+object SquareOfSquares {
   private val sum = 10
 
   def apply(leftUpSquare: Square, rightUpSquare: Square, leftDownSquare: Square, rightDownSquare: Square): Option[SquareOfSquares] = {
     if (isCorrectForSquareOfSquares(leftUpSquare, rightUpSquare, leftDownSquare, rightDownSquare))
-      Option(SquareOfSquares(leftUpSquare, rightUpSquare, leftDownSquare, rightDownSquare))
+      Option(new SquareOfSquares(leftUpSquare, rightUpSquare, leftDownSquare, rightDownSquare))
     else
       Option.empty
   }

@@ -6,7 +6,7 @@ case class Square(leftUp: Int, rightUp: Int, leftDown: Int, rightDown: Int) {
   }
 }
 
-object SquareFactory {
+object Square {
   def apply(s: String): Square = {
     val values = s.split(" ")
     assert(values.size == 4)

@@ -7,7 +7,7 @@ import java.io.{File, PrintWriter}
 object DataIO {
 
   def read(fileName: String): List[Square] =
-    Source.fromFile(fileName).getLines.map(s => SquareFactory.apply(s)).toList
+    Source.fromFile(fileName).getLines.map(s => Square.apply(s)).toList
 
   def write(data: ArrayBuffer[List[Square]], fileName: String): Unit = {
     val writer = new PrintWriter(new File(fileName))
