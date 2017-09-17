@@ -56,6 +56,16 @@ object PuzzleExecutor {
     buf.toList
   }
 
+  def getAllMatchedTens(eightOfSq: List[EightOfSquares], fourOfSq: List[SquareOfSquares]): List[TenOfSquares] = {
+    val buf: ArrayBuffer[TenOfSquares] = ArrayBuffer()
+    eightOfSq.foreach(sqSet1 =>
+      fourOfSq.foreach(sqSet2 =>
+        TenOfSquares.apply(sqSet1, sqSet2).foreach(set => buf += set)
+      )
+    )
+    buf.toList
+  }
+
   // TODO refactor
   def filterGroups(groups: List[SquareOfSquares]): List[SquareOfSquares] = {
     val upEquality = groups.filter(g => {
