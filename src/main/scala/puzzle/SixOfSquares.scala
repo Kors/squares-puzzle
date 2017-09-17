@@ -24,11 +24,7 @@ object SixOfSquares {
   }
 
   private def sideMatches(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Boolean = {
-    if (centralSoS.leftUpSquare == upperSoS.leftDownSquare &&
-      centralSoS.rightUpSquare == upperSoS.rightDownSquare)
-      true
-    else
-      false
+    centralSoS.upSide == upperSoS.downSide
   }
 
   private def hasNoDuplicates(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Boolean = {
