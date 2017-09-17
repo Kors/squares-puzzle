@@ -1,4 +1,4 @@
-package puzzle
+package puzzle.objects
 
 case class SixOfSquares(leftUpSquare: Square, rightUpSquare: Square,
                         leftCentralSquare: Square, rightCentralSquare: Square,

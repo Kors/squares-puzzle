@@ -1,4 +1,4 @@
-package puzzle
+package puzzle.objects
 
 case class Square(leftUp: Int, rightUp: Int, leftDown: Int, rightDown: Int) {
   def toFormattedString: String = {

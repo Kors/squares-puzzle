@@ -1,5 +1,7 @@
 package puzzle
 
+import puzzle.objects._
+
 import scala.collection.mutable.ArrayBuffer
 
 object PuzzleExecutor {

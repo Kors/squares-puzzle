@@ -1,4 +1,4 @@
-package puzzle
+package puzzle.objects
 
 case class PairOfSquares(leftSquare: Square, rightSquare: Square)
 

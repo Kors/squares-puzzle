@@ -1,4 +1,4 @@
-package puzzle
+package puzzle.objects
 
 case class EightOfSquares(_1: Square, _2: Square,
                           _3: Square, _4: Square,

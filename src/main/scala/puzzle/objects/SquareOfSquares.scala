@@ -1,4 +1,4 @@
-package puzzle
+package puzzle.objects
 
 case class SquareOfSquares(leftUpSquare: Square, rightUpSquare: Square, leftDownSquare: Square, rightDownSquare: Square) {
   def upSide: List[Square] = {
