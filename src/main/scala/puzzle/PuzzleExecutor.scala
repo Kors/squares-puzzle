@@ -11,7 +11,7 @@ object PuzzleExecutor {
     val groupsOfFour = getValues(pairs, pairs, SquareOfSquares.apply)
     val groupsOfSix = getValues(groupsOfFour, groupsOfFour, SixOfSquares.apply)
     val groupsOfEight = getValues(groupsOfSix, groupsOfFour, EightOfSquares.apply)
-    val groupsOfTen = getValues(groupsOfTen, groupsOfFour, TenOfSquares.apply)
+    val groupsOfTen = getValues(groupsOfEight, groupsOfFour, TenOfSquares.apply)
     getValues(groupsOfTen, groupsOfFour, FullPuzzle.apply)
   }
 
