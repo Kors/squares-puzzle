@@ -12,14 +12,14 @@ case class EightOfSquares(_1: Square, _2: Square,
 }
 
 object EightOfSquares {
-  def apply(central: SixOfSquares, downSoS: SquareOfSquares): Option[EightOfSquares] = {
-    if (central.downSide == downSoS.upSide &&
-      hasNoDuplicates(central, downSoS))
+  def apply(upperSoS: SixOfSquares, downSoS: SixOfSquares): Option[EightOfSquares] = {
+    if (upperSoS.downFour == downSoS.upperFour &&
+      hasNoDuplicates(upperSoS, downSoS))
       Option(
         new EightOfSquares(
-          central.leftUpSquare, central.rightUpSquare,
-          central.leftCentralSquare, central.rightCentralSquare,
-          central.leftDownSquare, central.rightDownSquare,
+          upperSoS.leftUpSquare, upperSoS.rightUpSquare,
+          upperSoS.leftCentralSquare, upperSoS.rightCentralSquare,
+          upperSoS.leftDownSquare, upperSoS.rightDownSquare,
           downSoS.leftDownSquare, downSoS.rightDownSquare
         )
       )
@@ -27,9 +27,6 @@ object EightOfSquares {
       Option.empty
   }
 
-  private def hasNoDuplicates(central: SixOfSquares, downSoS: SquareOfSquares): Boolean = {
-    Set(central.leftUpSquare, central.rightUpSquare,
-      central.leftCentralSquare, central.rightCentralSquare,
-      downSoS.leftDownSquare, downSoS.rightDownSquare).size == 6
-  }
+  private def hasNoDuplicates(upperSoS: SixOfSquares, downSoS: SixOfSquares): Boolean =
+    upperSoS.upSide.intersect(downSoS.downSide).isEmpty
 }

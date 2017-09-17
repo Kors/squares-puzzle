@@ -3,9 +3,15 @@ package puzzle.objects
 case class SixOfSquares(leftUpSquare: Square, rightUpSquare: Square,
                         leftCentralSquare: Square, rightCentralSquare: Square,
                         leftDownSquare: Square, rightDownSquare: Square) {
-  def downSide: List[Square] = {
-    List(leftDownSquare, rightDownSquare)
-  }
+
+  def upSide: List[Square] = List(leftUpSquare, rightUpSquare)
+
+  def downSide: List[Square] = List(leftDownSquare, rightDownSquare)
+
+  def upperFour: List[Square] = List(leftUpSquare, rightUpSquare, leftCentralSquare, rightCentralSquare)
+
+  def downFour: List[Square] = List(leftCentralSquare, rightCentralSquare, leftDownSquare, rightDownSquare)
+
 }
 
 object SixOfSquares {
