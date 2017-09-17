@@ -2,11 +2,14 @@ package puzzle
 
 import org.scalatest.FunSpec
 
+import scala.io.Source
+
 class PuzzleTest extends FunSpec {
   info("Starting...")
 
   val inputFileName = "src/main/resources/example4.txt"
   val outputFileName = "src/main/resources/output.txt"
+  val resultToCompare = "src/main/resources/output4.txt"
 
   describe("Read") {
     it("read from file successfully") {
@@ -31,8 +34,15 @@ class PuzzleTest extends FunSpec {
       print(finalResults)
       assert(finalResults.nonEmpty)
       println("FinalResults size:" + finalResults.size)
+      val output = read(outputFileName)
+      val correct = read(resultToCompare)
+      assert(output == correct)
     }
   }
+
+  def read(fileName: String): List[String] =
+    Source.fromFile(fileName).getLines.toList
+
 
   def print(vals: List[List[Square]]): Unit = {
     println()
