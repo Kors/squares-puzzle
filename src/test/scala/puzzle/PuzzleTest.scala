@@ -1,8 +1,8 @@
 package puzzle
 
 import org.scalatest.FunSpec
-import puzzle.PuzzleExecutor._
-import puzzle.objects.Square
+import puzzle.PuzzleExecutor.getValues
+import puzzle.objects.{EightOfSquares, PairOfSquares, SixOfSquares, SquareOfSquares}
 
 import scala.io.Source
 
@@ -25,6 +25,7 @@ class PuzzleTest extends FunSpec {
       val squares = DataIO.read(inputFileName)
       println("squares size:" + squares.size)
       val results = PuzzleExecutor.execute(squares)
+      println("results size:" + results.size)
       DataIO.write(results, outputFileName)
       assert(results.nonEmpty)
       val output = read(outputFileName)
