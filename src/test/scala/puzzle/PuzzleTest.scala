@@ -10,7 +10,7 @@ class PuzzleTest extends FunSpec {
   info("Starting...")
 
   val inputFileName = "src/main/resources/example4.txt"
-  val outputFileName = "src/main/resources/output.txt"
+  val outputFileName = "src/main/resources/test_output.txt"
   val resultToCompare = "src/main/resources/output4.txt"
 
   describe("Read") {
@@ -34,14 +34,10 @@ class PuzzleTest extends FunSpec {
       println("groups of 8 size:" + groupsOfEight.size)
       val groupsOfTen = getAllMatchedTens(groupsOfEight, groupsOfFour)
       println("groups of 10 size:" + groupsOfTen.size)
-      val filteredGroups = PuzzleExecutor.filterGroups(groupsOfFour)
-      println("filteredGroups size:" + filteredGroups.size)
-      val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groupsOfFour)
+      val results = getResults(groupsOfTen, groupsOfFour)
       println("results size:" + results.size)
-      val finalResults = PuzzleExecutor.filterResultsToFinal(results)
-      print(finalResults)
-      assert(finalResults.nonEmpty)
-      println("FinalResults size:" + finalResults.size)
+      DataIO.write(results, outputFileName)
+      assert(results.nonEmpty)
       val output = read(outputFileName)
       val correct = read(resultToCompare)
       assert(output == correct)
@@ -52,7 +48,7 @@ class PuzzleTest extends FunSpec {
     Source.fromFile(fileName).getLines.toList
 
 
-  def print(vals: List[List[Square]]): Unit = {
+  def print(vals: List[_]): Unit = {
     println()
     for (e <- vals)
       println(e)
