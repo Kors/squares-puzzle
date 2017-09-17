@@ -1,7 +1,7 @@
 package puzzle
 
 import org.scalatest.FunSpec
-import puzzle.PuzzleExecutor.getAllMatchedSixs
+import puzzle.PuzzleExecutor.{getAllMatchedEights, getAllMatchedSixs}
 
 import scala.io.Source
 
@@ -29,6 +29,8 @@ class PuzzleTest extends FunSpec {
       println("groups of 4 size:" + groupsOfFour.size)
       val groupsOfSix = getAllMatchedSixs(groupsOfFour)
       println("groups of 6 size:" + groupsOfSix.size)
+      val groupsOfEight = getAllMatchedEights(groupsOfSix, groupsOfFour)
+      println("groups of 8 size:" + groupsOfEight.size)
       val filteredGroups = PuzzleExecutor.filterGroups(groupsOfFour)
       println("filteredGroups size:" + filteredGroups.size)
       val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groupsOfFour)

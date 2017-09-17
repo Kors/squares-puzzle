@@ -8,6 +8,7 @@ object PuzzleExecutor {
     val pairs = getAllMatchedPairs(squares)
     val groupsOfFour = PuzzleExecutor.getAllMatchedQuarters(pairs)
     val groupsOfSix = getAllMatchedSixs(groupsOfFour)
+    val groupsOfEight = getAllMatchedEights(groupsOfSix, groupsOfFour)
     val filteredGroups = PuzzleExecutor.filterGroups(groupsOfFour)
     val results = PuzzleExecutor.mergeIntoResult(filteredGroups, groupsOfFour)
     PuzzleExecutor.filterResultsToFinal(results)
@@ -38,6 +39,16 @@ object PuzzleExecutor {
     sqOfSq.foreach(sqSet1 =>
       sqOfSq.filter(sqSet2 => sqSet2 != sqSet1).foreach(sqSet2 =>
         SixOfSquares.apply(sqSet1, sqSet2).foreach(set => buf += set)
+      )
+    )
+    buf.toList
+  }
+
+  def getAllMatchedEights(sixOfSq: List[SixOfSquares], fourOfSq: List[SquareOfSquares]): List[EightOfSquares] = {
+    val buf: ArrayBuffer[EightOfSquares] = ArrayBuffer()
+    sixOfSq.foreach(sqSet1 =>
+      fourOfSq.foreach(sqSet2 =>
+        EightOfSquares.apply(sqSet1, sqSet2).foreach(set => buf += set)
       )
     )
     buf.toList
