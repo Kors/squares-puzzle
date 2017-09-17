@@ -15,64 +15,32 @@ object PuzzleExecutor {
     PuzzleExecutor.getResults(groupsOfTen, groupsOfFour)
   }
 
-  def getAllMatchedPairs(squares: List[Square]): List[PairOfSquares] = {
-    val buf: ArrayBuffer[PairOfSquares] = ArrayBuffer()
-    squares.foreach(s1 =>
-      squares.filter(s => s != s1).toStream.foreach(s2 =>
-        PairOfSquares.apply(s1, s2).foreach(set => buf += set)
+  def getValues[T, R, S](firstList: List[T], secondList: List[R], function2: Function2[T, R, Option[S]]): List[S] = {
+    val buf: ArrayBuffer[S] = ArrayBuffer()
+    firstList.foreach(list1 =>
+      secondList.filter(list => list != list1).toStream.foreach(list2 =>
+        function2(list1, list2).foreach(set => buf += set)
       )
     )
     buf.toList
   }
 
-  def getAllMatchedQuarters(pairs: List[PairOfSquares]): List[SquareOfSquares] = {
-    val buf: ArrayBuffer[SquareOfSquares] = ArrayBuffer()
-    pairs.foreach(p1 =>
-      pairs.filter(p => p != p1).foreach(p2 =>
-        SquareOfSquares.apply(p1, p2).foreach(set => buf += set)
-      )
-    )
-    buf.toList
-  }
+  def getAllMatchedPairs(squares: List[Square]): List[PairOfSquares] =
+    getValues(squares, squares, PairOfSquares.apply)
 
-  def getAllMatchedSixs(sqOfSq: List[SquareOfSquares]): List[SixOfSquares] = {
-    val buf: ArrayBuffer[SixOfSquares] = ArrayBuffer()
-    sqOfSq.foreach(sqSet1 =>
-      sqOfSq.filter(sqSet2 => sqSet2 != sqSet1).foreach(sqSet2 =>
-        SixOfSquares.apply(sqSet1, sqSet2).foreach(set => buf += set)
-      )
-    )
-    buf.toList
-  }
+  def getAllMatchedQuarters(pairs: List[PairOfSquares]): List[SquareOfSquares] =
+    getValues(pairs, pairs, SquareOfSquares.apply)
 
-  def getAllMatchedEights(sixOfSq: List[SixOfSquares], fourOfSq: List[SquareOfSquares]): List[EightOfSquares] = {
-    val buf: ArrayBuffer[EightOfSquares] = ArrayBuffer()
-    sixOfSq.foreach(sqSet1 =>
-      fourOfSq.foreach(sqSet2 =>
-        EightOfSquares.apply(sqSet1, sqSet2).foreach(set => buf += set)
-      )
-    )
-    buf.toList
-  }
+  def getAllMatchedSixs(sqOfSq: List[SquareOfSquares]): List[SixOfSquares] =
+    getValues(sqOfSq, sqOfSq, SixOfSquares.apply)
 
-  def getAllMatchedTens(eightOfSq: List[EightOfSquares], fourOfSq: List[SquareOfSquares]): List[TenOfSquares] = {
-    val buf: ArrayBuffer[TenOfSquares] = ArrayBuffer()
-    eightOfSq.foreach(sqSet1 =>
-      fourOfSq.foreach(sqSet2 =>
-        TenOfSquares.apply(sqSet1, sqSet2).foreach(set => buf += set)
-      )
-    )
-    buf.toList
-  }
+  def getAllMatchedEights(sixOfSq: List[SixOfSquares], fourOfSq: List[SquareOfSquares]): List[EightOfSquares] =
+    getValues(sixOfSq, fourOfSq, EightOfSquares.apply)
 
-  def getResults(tenOfSq: List[TenOfSquares], fourOfSq: List[SquareOfSquares]): List[FullPuzzle] = {
-    val buf: ArrayBuffer[FullPuzzle] = ArrayBuffer()
-    tenOfSq.foreach(sqSet1 =>
-      fourOfSq.foreach(sqSet2 =>
-        FullPuzzle.apply(sqSet1, sqSet2).foreach(set => buf += set)
-      )
-    )
-    buf.toList
-  }
+  def getAllMatchedTens(eightOfSq: List[EightOfSquares], fourOfSq: List[SquareOfSquares]): List[TenOfSquares] =
+    getValues(eightOfSq, fourOfSq, TenOfSquares.apply)
+
+  def getResults(tenOfSq: List[TenOfSquares], fourOfSq: List[SquareOfSquares]): List[FullPuzzle] =
+    getValues(tenOfSq, fourOfSq, FullPuzzle.apply)
 
 }
