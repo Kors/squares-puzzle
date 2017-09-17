@@ -48,11 +48,4 @@ class PuzzleTest extends FunSpec {
     Source.fromFile(fileName).getLines.toList
 
 
-  def print(vals: List[_]): Unit = {
-    println()
-    for (e <- vals)
-      println(e)
-  }
-
-
 }
