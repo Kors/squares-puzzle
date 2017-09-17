@@ -14,27 +14,21 @@ object PuzzleExecutor {
 
   def getAllMatchedPairs(squares: List[Square]): List[PairOfSquares] = {
     val buf: ArrayBuffer[PairOfSquares] = ArrayBuffer()
-    for (s1 <- squares) {
-      val sub1 = squares.filter(s => s != s1)
-      for (s2 <- sub1) {
-        for (set <- PairOfSquares.apply(s1, s2)) {
-          buf += set
-        }
-      }
-    }
+    squares.foreach(s1 =>
+      squares.filter(s => s != s1).toStream.foreach(s2 =>
+        PairOfSquares.apply(s1, s2).foreach(set => buf += set)
+      )
+    )
     buf.toList
   }
 
   def getAllMatchedQuarters(pairs: List[PairOfSquares]): List[SquareOfSquares] = {
     val buf: ArrayBuffer[SquareOfSquares] = ArrayBuffer()
-    for (p1 <- pairs) {
-      val sub1 = pairs.filter(p => p != p1) // TODO проверить корректность такой фильтрации на двух разных элементах с одинаковым содержимым
-      for (p2 <- sub1) {
-        for (set <- SquareOfSquares.apply(p1, p2)) {
-          buf += set
-        }
-      }
-    }
+    pairs.foreach(p1 =>
+      pairs.filter(p => p != p1).foreach(p2 =>
+        SquareOfSquares.apply(p1, p2).foreach(set => buf += set)
+      )
+    )
     buf.toList
   }
 
@@ -144,7 +138,7 @@ object PuzzleExecutor {
 
   // TODO фильтр результатов по тройкам
   def filterResultsToFinal(results: List[List[Square]]): List[List[Square]] = {
-    val finalResults = results.filter(list => {
+    results.filter(list => {
       if (list(0).leftDown + list(2).rightUp + list(3).leftUp <= 10 &&
         list(1).rightDown + list(4).rightUp + list(5).leftUp <= 10 &&
         list(6).rightDown + list(7).leftDown + list(10).leftUp <= 10 &&
@@ -153,7 +147,6 @@ object PuzzleExecutor {
       else
         false
     })
-    finalResults
   }
 
 }
