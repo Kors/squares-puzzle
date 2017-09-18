@@ -5,7 +5,7 @@ class SixOfSquares(val seq: Seq[Square]) {
   val leftDownSquare: Square = seq(4)
   val rightDownSquare: Square = seq(5)
 
-  def downSide: List[Square] = List(leftDownSquare, rightDownSquare)
+  def downSide: Seq[Square] = Seq(leftDownSquare, rightDownSquare)
 
 }
 

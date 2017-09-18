@@ -1,34 +1,27 @@
 package puzzle.objects
 
-class EightOfSquares(val _1: Square, val _2: Square,
-                     val _3: Square, val _4: Square,
-                     val _5: Square, val _6: Square,
-                     val _7: Square, val _8: Square) {
+class EightOfSquares(seq: Seq[Square]) {
 
-  def leftConnectingSide: List[Square] = List(_3, _5)
+  def leftConnectingSide: Seq[Square] = Seq(seq(2), seq(4))
 
-  def rightConnectingSide: List[Square] = List(_4, _6)
+  def rightConnectingSide: Seq[Square] = Seq(seq(3), seq(5))
 
 }
 
 object EightOfSquares {
+
   def apply(central: SixOfSquares, downSoS: SquareOfSquares): Option[EightOfSquares] = {
-    if (central.downSide == downSoS.upSide && hasNoDuplicates(central, downSoS))
-      Option(
-        new EightOfSquares(
-          central.leftUpSquare, central.rightUpSquare,
-          central.leftCentralSquare, central.rightCentralSquare,
-          central.leftDownSquare, central.rightDownSquare,
-          downSoS.leftDownSquare, downSoS.rightDownSquare
-        )
-      )
+
+    def seq = (central.seq ++ downSoS.seq).distinct
+
+    def sideMatches(central: SixOfSquares, downSoS: SquareOfSquares): Boolean =
+      central.downSide == downSoS.upSide
+
+    if (sideMatches(central, downSoS) && seq.size == 8 && FigureUtils.isCorrect(seq))
+      Option(new EightOfSquares(seq))
     else
       None
+
   }
 
-  private def hasNoDuplicates(central: SixOfSquares, downSoS: SquareOfSquares): Boolean = {
-    Set(central.leftUpSquare, central.rightUpSquare,
-      central.leftCentralSquare, central.rightCentralSquare,
-      downSoS.leftDownSquare, downSoS.rightDownSquare).size == 6
-  }
 }

@@ -19,6 +19,7 @@ object FigureUtils {
         seq(1).rightDown + seq(3).rightUp <= maxSum
 
       case (6) => true
+      case (8) => true
     }
   }
 }
