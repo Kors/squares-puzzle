@@ -1,14 +1,23 @@
 package puzzle.objects
 
-class PairOfSquares(val leftSquare: Square, val rightSquare: Square)
+class PairOfSquares(val seq: Seq[Square]) extends Figure {
+
+  def toSeq: Seq[Square] = seq
+
+  def leftSquare: Square = seq.head
+
+  def rightSquare: Square = seq(1)
+
+}
 
 object PairOfSquares {
-  private val sum = 10
 
   def apply(leftSquare: Square, rightSquare: Square): Option[PairOfSquares] = {
-    if (leftSquare.rightUp + rightSquare.leftUp <= sum &&
-      leftSquare.rightDown + rightSquare.leftDown <= sum)
-      Option(new PairOfSquares(leftSquare, rightSquare))
+
+    val seq = Seq(leftSquare, rightSquare)
+
+    if (FigureUtils.isCorrect(seq))
+      Option(new PairOfSquares(seq))
     else
       None
   }
