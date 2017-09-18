@@ -13,8 +13,7 @@ class EightOfSquares(val _1: Square, val _2: Square,
 
 object EightOfSquares {
   def apply(central: SixOfSquares, downSoS: SquareOfSquares): Option[EightOfSquares] = {
-    if (central.downSide == downSoS.upSide &&
-      hasNoDuplicates(central, downSoS))
+    if (central.downSide == downSoS.upSide && hasNoDuplicates(central, downSoS))
       Option(
         new EightOfSquares(
           central.leftUpSquare, central.rightUpSquare,
@@ -24,7 +23,7 @@ object EightOfSquares {
         )
       )
     else
-      Option.empty
+      None
   }
 
   private def hasNoDuplicates(central: SixOfSquares, downSoS: SquareOfSquares): Boolean = {

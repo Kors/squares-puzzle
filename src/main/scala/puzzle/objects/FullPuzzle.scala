@@ -31,7 +31,7 @@ object FullPuzzle {
         )
       )
     else
-      Option.empty
+      None
   }
 
   private def hasNoDuplicates(central: TenOfSquares, leftSoS: SquareOfSquares): Boolean = {

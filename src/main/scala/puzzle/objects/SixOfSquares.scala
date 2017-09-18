@@ -20,7 +20,7 @@ object SixOfSquares {
         )
       )
     else
-      Option.empty
+      None
   }
 
   private def sideMatches(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Boolean = {

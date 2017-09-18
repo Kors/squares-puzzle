@@ -29,7 +29,7 @@ object TenOfSquares {
         )
       )
     else
-      Option.empty
+      None
   }
 
   private def hasNoDuplicates(central: EightOfSquares, rightSoS: SquareOfSquares): Boolean = {

@@ -10,6 +10,6 @@ object PairOfSquares {
       leftSquare.rightDown + rightSquare.leftDown <= sum)
       Option(new PairOfSquares(leftSquare, rightSquare))
     else
-      Option.empty
+      None
   }
 }

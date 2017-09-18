@@ -25,7 +25,7 @@ object SquareOfSquares {
     if (isCorrectForSquareOfSquares(upPair, downPair))
       Option(new SquareOfSquares(upPair.leftSquare, upPair.rightSquare, downPair.leftSquare, downPair.rightSquare))
     else
-      Option.empty
+      None
   }
 
   private def isCorrectForSquareOfSquares(upPair: PairOfSquares, downPair: PairOfSquares): Boolean = {
