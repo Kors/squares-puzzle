@@ -1,9 +1,9 @@
 package puzzle.objects
 
-case class TenOfSquares(_1: Square, _2: Square,
-                        _3: Square, _4: Square, _5: Square,
-                        _6: Square, _7: Square, _8: Square,
-                        _9: Square, _10: Square) {
+class TenOfSquares(val _1: Square, val _2: Square,
+                   val _3: Square, val _4: Square, val _5: Square,
+                   val _6: Square, val _7: Square, val _8: Square,
+                   val _9: Square, val _10: Square) {
 
   def leftConnectingSide: List[Square] = List(_3, _6)
 

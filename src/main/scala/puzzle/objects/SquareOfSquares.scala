@@ -1,6 +1,6 @@
 package puzzle.objects
 
-case class SquareOfSquares(leftUpSquare: Square, rightUpSquare: Square, leftDownSquare: Square, rightDownSquare: Square) {
+class SquareOfSquares(val leftUpSquare: Square, val rightUpSquare: Square, val leftDownSquare: Square, val rightDownSquare: Square) {
   def upSide: List[Square] = {
     List(leftUpSquare, rightUpSquare)
   }

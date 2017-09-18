@@ -1,6 +1,6 @@
 package puzzle.objects
 
-case class Square(leftUp: Int, rightUp: Int, leftDown: Int, rightDown: Int, number: Int) {
+class Square(val leftUp: Int, val rightUp: Int, val leftDown: Int, val rightDown: Int, number: Int) {
   def toFormattedString: String = {
     leftUp + " " + rightUp + " " + leftDown + " " + rightDown + System.lineSeparator()
   }
@@ -10,6 +10,6 @@ object Square {
   def apply(s: String, number: Int): Square = {
     val values = s.split(" ")
     assert(values.size == 4)
-    Square(values(0).toInt, values(1).toInt, values(2).toInt, values(3).toInt, number)
+    new Square(values(0).toInt, values(1).toInt, values(2).toInt, values(3).toInt, number)
   }
 }

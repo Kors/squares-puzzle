@@ -1,6 +1,6 @@
 package puzzle.objects
 
-case class PairOfSquares(leftSquare: Square, rightSquare: Square)
+class PairOfSquares(val leftSquare: Square, val rightSquare: Square)
 
 object PairOfSquares {
   private val sum = 10
