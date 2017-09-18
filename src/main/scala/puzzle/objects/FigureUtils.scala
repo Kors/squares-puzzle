@@ -23,8 +23,13 @@ object FigureUtils {
       case (6) => true
       case (8) => true
 
-      case (10) => seq(1).rightDown + seq(3).rightUp + seq(4).leftUp <= maxSum &&
+      case (10) => hasNoDuplicates(seq) &&
+        seq(1).rightDown + seq(3).rightUp + seq(4).leftUp <= maxSum &&
         seq(6).rightDown + seq(7).leftDown + seq(9).rightUp <= maxSum
+
+      case (12) => hasNoDuplicates(seq) &&
+        seq.head.leftDown + seq(2).rightUp + seq(3).leftUp <= maxSum &&
+        seq(6).rightDown + seq(7).leftDown + seq(10).leftUp <= maxSum
 
     }
 

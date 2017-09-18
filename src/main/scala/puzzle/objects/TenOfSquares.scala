@@ -1,6 +1,6 @@
 package puzzle.objects
 
-class TenOfSquares(seq: Seq[Square]) {
+class TenOfSquares(val seq: Seq[Square]) {
 
   def leftConnectingSide: List[Square] = List(seq(2), seq(5))
 
