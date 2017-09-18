@@ -17,6 +17,8 @@ object FigureUtils {
         seq.head.rightDown + seq(1).leftDown + seq(2).rightUp + seq(3).leftUp == maxSum &&
         seq.head.leftDown + seq(2).leftUp <= maxSum &&
         seq(1).rightDown + seq(3).rightUp <= maxSum
+
+      case (6) => true
     }
   }
 }
