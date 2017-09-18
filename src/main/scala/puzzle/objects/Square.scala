@@ -6,9 +6,14 @@ class Square(val leftUp: Int, val rightUp: Int, val leftDown: Int, val rightDown
 }
 
 object Square {
+
   def apply(s: String, number: Int): Square = {
+
     val values = s.split(" ")
-    assert(values.size == 4)
+
+    require(values.size == 4)
+
     new Square(values(0).toInt, values(1).toInt, values(2).toInt, values(3).toInt, number)
   }
+
 }
