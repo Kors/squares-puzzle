@@ -1,6 +1,6 @@
 package puzzle.objects
 
-class EightOfSquares(seq: Seq[Square]) {
+class EightOfSquares(val seq: Seq[Square]) {
 
   def leftConnectingSide: Seq[Square] = Seq(seq(2), seq(4))
 

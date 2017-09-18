@@ -8,7 +8,9 @@ object FigureUtils {
   // для каждой фигуры считает что все "новые" стыки объектов соответствуют условиям
   // те условия, которые предполагаются проверенными ранее, не учитываются.
   // (да, для понимания сложно, но проще это написать не выходит т.к. очень разные условия на каждом шаге)
+
   def isCorrect(seq: Seq[Square]): Boolean = {
+
     seq.size match {
       case (2) => hasNoDuplicates(seq) &&
         seq.head.rightUp + seq(1).leftUp <= maxSum && seq.head.rightDown + seq(1).leftDown <= maxSum
@@ -20,6 +22,11 @@ object FigureUtils {
 
       case (6) => true
       case (8) => true
+
+      case (10) => seq(1).rightDown + seq(3).rightUp + seq(4).leftUp <= maxSum &&
+        seq(6).rightDown + seq(7).leftDown + seq(9).rightUp <= maxSum
+
     }
+
   }
 }
