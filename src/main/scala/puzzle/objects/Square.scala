@@ -1,9 +1,8 @@
 package puzzle.objects
 
 class Square(val leftUp: Int, val rightUp: Int, val leftDown: Int, val rightDown: Int, number: Int) {
-  def toFormattedString: String = {
-    leftUp + " " + rightUp + " " + leftDown + " " + rightDown + System.lineSeparator()
-  }
+
+  def toFormattedString: String = s"$leftUp $rightUp $leftDown $rightDown%n"
 }
 
 object Square {

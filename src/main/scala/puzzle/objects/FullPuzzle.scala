@@ -5,9 +5,8 @@ class FullPuzzle(val _1: Square, val _2: Square,
                  val _7: Square, val _8: Square, val _9: Square, val _10: Square,
                  val _11: Square, val _12: Square) {
 
-  override def toString: String =
-    List(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12)
-      .map(sq => sq.toFormattedString).toStream.mkString
+  override def toString: String = List(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12)
+    .map(sq => sq.toFormattedString).toStream.mkString
 
 }
 

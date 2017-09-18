@@ -3,9 +3,8 @@ package puzzle.objects
 class SixOfSquares(val leftUpSquare: Square, val rightUpSquare: Square,
                    val leftCentralSquare: Square, val rightCentralSquare: Square,
                    val leftDownSquare: Square, val rightDownSquare: Square) {
-  def downSide: List[Square] = {
-    List(leftDownSquare, rightDownSquare)
-  }
+
+  def downSide: List[Square] = List(leftDownSquare, rightDownSquare)
 }
 
 object SixOfSquares {

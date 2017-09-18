@@ -1,21 +1,14 @@
 package puzzle.objects
 
 class SquareOfSquares(val leftUpSquare: Square, val rightUpSquare: Square, val leftDownSquare: Square, val rightDownSquare: Square) {
-  def upSide: List[Square] = {
-    List(leftUpSquare, rightUpSquare)
-  }
 
-  def downSide: List[Square] = {
-    List(leftDownSquare, rightDownSquare)
-  }
+  def upSide: List[Square] = List(leftUpSquare, rightUpSquare)
 
-  def leftSide: List[Square] = {
-    List(leftUpSquare, leftDownSquare)
-  }
+  def downSide: List[Square] = List(leftDownSquare, rightDownSquare)
 
-  def rightSide: List[Square] = {
-    List(rightUpSquare, rightDownSquare)
-  }
+  def leftSide: List[Square] = List(leftUpSquare, leftDownSquare)
+
+  def rightSide: List[Square] =   List(rightUpSquare, rightDownSquare)
 }
 
 object SquareOfSquares {
