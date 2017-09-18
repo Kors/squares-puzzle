@@ -2,8 +2,6 @@ package puzzle.objects
 
 class PairOfSquares(val seq: Seq[Square]) extends Figure {
 
-  def toSeq: Seq[Square] = seq
-
   def leftSquare: Square = seq.head
 
   def rightSquare: Square = seq(1)
