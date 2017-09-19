@@ -1,5 +1,5 @@
 name := "puzzle"
-version := "1.0.2-SNAPSHOT"
+version := "1.0.3-SNAPSHOT"
 scalaVersion := "2.12.3"
 
 libraryDependencies ++= Seq(
