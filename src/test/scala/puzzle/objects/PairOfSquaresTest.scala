@@ -26,7 +26,7 @@ class PairOfSquaresTest extends FunSpec {
       var optionPair1 = PairOfSquares(sq1, sq2)
       assert(optionPair1.isEmpty)
 
-      val sq3 = Square("1 5 1 1")
+      val sq3 = Square("5 1 1 1")
       val optionPair2 = PairOfSquares(sq1, sq3)
       assert(optionPair2.isEmpty)
     }
