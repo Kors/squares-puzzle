@@ -2,10 +2,10 @@ package puzzle.objects
 
 class SquareOfSquares(val seq: Seq[Square]) extends Figure {
 
-  val leftUpSquare: Square = seq.head
-  val rightUpSquare: Square = seq(1)
-  val leftDownSquare: Square = seq(2)
-  val rightDownSquare: Square = seq(3)
+  private val leftUpSquare: Square = seq.head
+  private val rightUpSquare: Square = seq(1)
+  private val leftDownSquare: Square = seq(2)
+  private val rightDownSquare: Square = seq(3)
 
   def upSide: Seq[Square] = Seq(leftUpSquare, rightUpSquare)
 

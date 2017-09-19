@@ -2,8 +2,8 @@ package puzzle.objects
 
 class SixOfSquares(val seq: Seq[Square]) {
 
-  val leftDownSquare: Square = seq(4)
-  val rightDownSquare: Square = seq(5)
+  private val leftDownSquare: Square = seq(4)
+  private val rightDownSquare: Square = seq(5)
 
   def downSide: Seq[Square] = Seq(leftDownSquare, rightDownSquare)
 
@@ -13,9 +13,7 @@ object SixOfSquares {
 
   def apply(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Option[SixOfSquares] = {
 
-    val base = centralSoS.seq
-
-    def seq = Seq(upperSoS.leftUpSquare, upperSoS.rightUpSquare, base.head, base(1), base(2), base(3))
+    def seq = upperSoS.upSide ++ centralSoS.seq
 
     def sideMatches(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Boolean =
       centralSoS.upSide == upperSoS.downSide

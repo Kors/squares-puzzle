@@ -31,6 +31,7 @@ object FigureUtils {
         seq.head.leftDown + seq(2).rightUp + seq(3).leftUp <= maxSum &&
         seq(6).rightDown + seq(7).leftDown + seq(10).leftUp <= maxSum
 
+      case _ => false
     }
 
   }

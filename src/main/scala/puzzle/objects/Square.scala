@@ -11,7 +11,7 @@ object Square {
 
     val values = s.split(" ")
 
-    require(values.size == 4)
+    require(values.length == 4)
 
     new Square(values(0).toInt, values(1).toInt, values(2).toInt, values(3).toInt, number)
   }
