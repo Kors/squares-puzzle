@@ -8,12 +8,8 @@ import puzzle.objects.Square
 
 object DataIO {
 
-  def read(fileName: String): Seq[Square] = {
-    val strings = Source.fromFile(fileName).getLines.toList
-    for {
-      i <- 0 to 11
-    } yield Square(strings(i), i)
-  }
+  def read(fileName: String): Seq[Square] =
+    Source.fromFile(fileName).getLines.map(line => Square(line)).toList
 
   def write[T](data: Seq[T], fileName: String): Unit = {
     val writer = new PrintWriter(new File(fileName))
