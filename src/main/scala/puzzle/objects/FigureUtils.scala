@@ -20,8 +20,8 @@ object FigureUtils {
         seq.head.leftDown + seq(2).leftUp <= maxSum &&
         seq(1).rightDown + seq(3).rightUp <= maxSum
 
-      case (6) => true
-      case (8) => true
+      case (6) => hasNoDuplicates(seq)
+      case (8) => hasNoDuplicates(seq)
 
       case (10) => hasNoDuplicates(seq) &&
         seq(1).rightDown + seq(3).rightUp + seq(4).leftUp <= maxSum &&

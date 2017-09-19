@@ -13,12 +13,14 @@ object SixOfSquares {
 
   def apply(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Option[SixOfSquares] = {
 
-    def seq: Seq[Square] = (centralSoS.seq ++ upperSoS.seq).distinct
+    val base = centralSoS.seq
+
+    def seq = Seq(upperSoS.leftUpSquare, upperSoS.rightUpSquare, base.head, base(1), base(2), base(3))
 
     def sideMatches(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Boolean =
       centralSoS.upSide == upperSoS.downSide
 
-    if (sideMatches(centralSoS, upperSoS) && seq.size == 6 && FigureUtils.isCorrect(seq))
+    if (sideMatches(centralSoS, upperSoS) && FigureUtils.isCorrect(seq))
       Option(new SixOfSquares(seq))
     else
       None
