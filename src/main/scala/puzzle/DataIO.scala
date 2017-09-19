@@ -16,7 +16,7 @@ object DataIO {
     squares.toList
   }
 
-  def write(data: List[_], fileName: String): Unit = {
+  def write[T](data: Seq[T], fileName: String): Unit = {
     val writer = new PrintWriter(new File(fileName))
     data.foreach(result => {
       writer.write(result.toString)

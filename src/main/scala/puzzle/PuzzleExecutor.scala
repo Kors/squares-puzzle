@@ -4,7 +4,7 @@ import puzzle.objects._
 
 object PuzzleExecutor {
 
-  def execute(squares: List[Square]): List[FullPuzzle] = {
+  def execute(squares: Seq[Square]): List[FullPuzzle] = {
     val pairs = getValues(squares, squares, PairOfSquares.apply)
     println("pairs size:" + pairs.size)
     val groupsOfFour = getValues(pairs, pairs, SquareOfSquares.apply)
@@ -18,7 +18,7 @@ object PuzzleExecutor {
     getValues(groupsOfTen, groupsOfFour, FullPuzzle.apply)
   }
 
-  def getValues[T, R, S](firstList: List[T], secondList: List[R], function2: Function2[T, R, Option[S]]): List[S] = {
+  def getValues[T, R, S](firstList: Seq[T], secondList: Seq[R], function2: Function2[T, R, Option[S]]): List[S] = {
     firstList.par.flatMap(list1 =>
       secondList.filter(list => list != list1).map(list2 => function2(list1, list2))
     ).filter(o => o.isDefined).map(o => o.get).toList

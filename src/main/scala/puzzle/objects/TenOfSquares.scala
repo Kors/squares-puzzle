@@ -2,7 +2,7 @@ package puzzle.objects
 
 class TenOfSquares(val seq: Seq[Square]) {
 
-  def leftConnectingSide: List[Square] = List(seq(2), seq(5))
+  def leftConnectingSide: Seq[Square] = Seq(seq(2), seq(5))
 
 }
 

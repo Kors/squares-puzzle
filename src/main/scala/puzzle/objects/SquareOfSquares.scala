@@ -7,13 +7,13 @@ class SquareOfSquares(val seq: Seq[Square]) extends Figure {
   val leftDownSquare: Square = seq(2)
   val rightDownSquare: Square = seq(3)
 
-  def upSide: List[Square] = List(leftUpSquare, rightUpSquare)
+  def upSide: Seq[Square] = Seq(leftUpSquare, rightUpSquare)
 
-  def downSide: List[Square] = List(leftDownSquare, rightDownSquare)
+  def downSide: Seq[Square] = Seq(leftDownSquare, rightDownSquare)
 
-  def leftSide: List[Square] = List(leftUpSquare, leftDownSquare)
+  def leftSide: Seq[Square] = Seq(leftUpSquare, leftDownSquare)
 
-  def rightSide: List[Square] = List(rightUpSquare, rightDownSquare)
+  def rightSide: Seq[Square] = Seq(rightUpSquare, rightDownSquare)
 
 }
 
@@ -21,7 +21,7 @@ object SquareOfSquares {
 
   def apply(upPair: PairOfSquares, downPair: PairOfSquares): Option[SquareOfSquares] = {
 
-    def seq = Seq(upPair.leftSquare, upPair.rightSquare, downPair.leftSquare, downPair.rightSquare)
+    def seq = upPair.seq ++ downPair.seq
 
     if (FigureUtils.isCorrect(seq))
       Option(new SquareOfSquares(seq))
