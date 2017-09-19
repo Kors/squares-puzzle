@@ -8,6 +8,8 @@ class TenOfSquares(val seq: Seq[Square]) {
 
 object TenOfSquares extends CompoundFigure {
 
+  override protected val figureSize = 10
+
   def apply(eos: EightOfSquares, rightSoS: SquareOfSquares): Option[TenOfSquares] = {
 
     val base = eos.seq

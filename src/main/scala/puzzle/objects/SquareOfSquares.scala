@@ -19,6 +19,8 @@ class SquareOfSquares(val seq: Seq[Square]) {
 
 object SquareOfSquares extends CompoundFigure {
 
+  override protected val figureSize = 4
+
   def apply(upPair: PairOfSquares, downPair: PairOfSquares): Option[SquareOfSquares] = {
 
     def seq = upPair.seq ++ downPair.seq

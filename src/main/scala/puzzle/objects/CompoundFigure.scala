@@ -1,7 +1,10 @@
 package puzzle.objects
 
 trait CompoundFigure {
-  private def maxSum = 10
+
+  protected val figureSize: Int
+
+  private val maxSum = 10
 
   private def hasNoDuplicates(seq: Seq[Square]): Boolean = seq.size == seq.distinct.size
 
@@ -11,28 +14,32 @@ trait CompoundFigure {
 
   protected def isCorrect(seq: Seq[Square]): Boolean = {
 
-    seq.size match {
-      case (2) => hasNoDuplicates(seq) &&
-        seq.head.rightUp + seq(1).leftUp <= maxSum && seq.head.rightDown + seq(1).leftDown <= maxSum
+    seq.size == figureSize &&
+      hasNoDuplicates(seq) && {
+      seq.size match {
+        case (2) =>
+          seq.head.rightUp + seq(1).leftUp <= maxSum && seq.head.rightDown + seq(1).leftDown <= maxSum
 
-      case (4) => hasNoDuplicates(seq) &&
-        seq.head.rightDown + seq(1).leftDown + seq(2).rightUp + seq(3).leftUp == maxSum &&
-        seq.head.leftDown + seq(2).leftUp <= maxSum &&
-        seq(1).rightDown + seq(3).rightUp <= maxSum
+        case (4) =>
+          seq.head.rightDown + seq(1).leftDown + seq(2).rightUp + seq(3).leftUp == maxSum &&
+            seq.head.leftDown + seq(2).leftUp <= maxSum &&
+            seq(1).rightDown + seq(3).rightUp <= maxSum
 
-      case (6) => hasNoDuplicates(seq)
-      case (8) => hasNoDuplicates(seq)
+        case (6) => true
+        case (8) => true
 
-      case (10) => hasNoDuplicates(seq) &&
-        seq(1).rightDown + seq(3).rightUp + seq(4).leftUp <= maxSum &&
-        seq(6).rightDown + seq(7).leftDown + seq(9).rightUp <= maxSum
+        case (10) =>
+          seq(1).rightDown + seq(3).rightUp + seq(4).leftUp <= maxSum &&
+            seq(6).rightDown + seq(7).leftDown + seq(9).rightUp <= maxSum
 
-      case (12) => hasNoDuplicates(seq) &&
-        seq.head.leftDown + seq(2).rightUp + seq(3).leftUp <= maxSum &&
-        seq(6).rightDown + seq(7).leftDown + seq(10).leftUp <= maxSum
+        case (12) =>
+          seq.head.leftDown + seq(2).rightUp + seq(3).leftUp <= maxSum &&
+            seq(6).rightDown + seq(7).leftDown + seq(10).leftUp <= maxSum
 
-      case _ => false
+        case _ => false
+      }
     }
+
   }
 
 }

@@ -11,6 +11,8 @@ class SixOfSquares(val seq: Seq[Square]) {
 
 object SixOfSquares extends CompoundFigure {
 
+  override protected val figureSize = 6
+
   def apply(centralSoS: SquareOfSquares, upperSoS: SquareOfSquares): Option[SixOfSquares] = {
 
     def seq = upperSoS.upSide ++ centralSoS.seq

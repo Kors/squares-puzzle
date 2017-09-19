@@ -10,6 +10,8 @@ class PairOfSquares(val seq: Seq[Square]) {
 
 object PairOfSquares extends CompoundFigure {
 
+  override protected val figureSize = 2
+
   def apply(leftSquare: Square, rightSquare: Square): Option[PairOfSquares] = {
 
     val seq = Seq(leftSquare, rightSquare)

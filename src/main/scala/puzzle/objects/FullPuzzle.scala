@@ -8,6 +8,8 @@ class FullPuzzle(val seq: Seq[Square]) {
 
 object FullPuzzle extends CompoundFigure {
 
+  override protected val figureSize = 12
+
   def apply(tos: TenOfSquares, leftSoS: SquareOfSquares): Option[FullPuzzle] = {
 
     val base = tos.seq
