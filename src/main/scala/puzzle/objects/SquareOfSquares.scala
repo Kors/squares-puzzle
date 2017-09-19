@@ -1,6 +1,6 @@
 package puzzle.objects
 
-class SquareOfSquares(val seq: Seq[Square]) extends Figure {
+class SquareOfSquares(val seq: Seq[Square]) {
 
   private val leftUpSquare: Square = seq.head
   private val rightUpSquare: Square = seq(1)
@@ -17,13 +17,13 @@ class SquareOfSquares(val seq: Seq[Square]) extends Figure {
 
 }
 
-object SquareOfSquares {
+object SquareOfSquares extends CompoundFigure {
 
   def apply(upPair: PairOfSquares, downPair: PairOfSquares): Option[SquareOfSquares] = {
 
     def seq = upPair.seq ++ downPair.seq
 
-    if (FigureUtils.isCorrect(seq))
+    if (isCorrect(seq))
       Option(new SquareOfSquares(seq))
     else
       None

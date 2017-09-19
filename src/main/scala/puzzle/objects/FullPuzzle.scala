@@ -6,7 +6,7 @@ class FullPuzzle(val seq: Seq[Square]) {
 
 }
 
-object FullPuzzle {
+object FullPuzzle extends CompoundFigure {
 
   def apply(tos: TenOfSquares, leftSoS: SquareOfSquares): Option[FullPuzzle] = {
 
@@ -21,7 +21,7 @@ object FullPuzzle {
     def sideMatches(central: TenOfSquares, leftSoS: SquareOfSquares): Boolean =
       central.leftConnectingSide == leftSoS.rightSide
 
-    if (sideMatches(tos, leftSoS) && FigureUtils.isCorrect(seq))
+    if (sideMatches(tos, leftSoS) && isCorrect(seq))
       Option(new FullPuzzle(seq))
     else
       None

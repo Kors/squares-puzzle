@@ -8,7 +8,7 @@ class EightOfSquares(val seq: Seq[Square]) {
 
 }
 
-object EightOfSquares {
+object EightOfSquares extends CompoundFigure {
 
   def apply(central: SixOfSquares, downSoS: SquareOfSquares): Option[EightOfSquares] = {
 
@@ -17,7 +17,7 @@ object EightOfSquares {
     def sideMatches(central: SixOfSquares, downSoS: SquareOfSquares): Boolean =
       central.downSide == downSoS.upSide
 
-    if (sideMatches(central, downSoS) && FigureUtils.isCorrect(seq))
+    if (sideMatches(central, downSoS) && isCorrect(seq))
       Option(new EightOfSquares(seq))
     else
       None

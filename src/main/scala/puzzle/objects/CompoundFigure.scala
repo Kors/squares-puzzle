@@ -1,15 +1,15 @@
 package puzzle.objects
 
-object FigureUtils {
-  def maxSum = 10
+trait CompoundFigure {
+  private def maxSum = 10
 
-  def hasNoDuplicates(seq: Seq[Square]): Boolean = seq.size == seq.distinct.size
+  private def hasNoDuplicates(seq: Seq[Square]): Boolean = seq.size == seq.distinct.size
 
   // для каждой фигуры считает что все "новые" стыки объектов соответствуют условиям
   // те условия, которые предполагаются проверенными ранее, не учитываются.
   // (да, для понимания сложно, но проще это написать не выходит т.к. очень разные условия на каждом шаге)
 
-  def isCorrect(seq: Seq[Square]): Boolean = {
+  protected def isCorrect(seq: Seq[Square]): Boolean = {
 
     seq.size match {
       case (2) => hasNoDuplicates(seq) &&
@@ -33,6 +33,7 @@ object FigureUtils {
 
       case _ => false
     }
-
   }
+
 }
+
