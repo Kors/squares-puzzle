@@ -7,10 +7,16 @@ object MainRunner {
   val outputFileName = "src/main/resources/output.txt"
 
   def main(args: Array[String]): Unit = {
+
     System.out.println("Puzzle processing...")
+
     val squares = DataIO.read(inputFileName)
+
     val results = PuzzleExecutor.execute(squares)
+
     DataIO.write(results, outputFileName)
+
     System.out.println("processed successfully. " + results.size + " results found.")
+
   }
 }
